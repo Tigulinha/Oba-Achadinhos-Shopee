@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de Pesquisa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .results div {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .results div:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-bar" id="searchBar" placeholder="Digite sua pesquisa...">
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        // Lista de itens à venda
+        const items = [
+            "Boné Preto",
+            "Camiseta Branca",
+            "Tênis Esportivo",
+            "Jaqueta de Couro",
+            "Relógio Digital",
+            "Bolsa Feminina",
+            "Óculos de Sol",
+            "Chapéu de Palha",
+            "Fone de Ouvido",
+            "Mochila Escolar"
+        ];
+
+        const searchBar = document.getElementById('searchBar');
+        const resultsContainer = document.getElementById('results');
+
+        // Função para filtrar os itens
+        searchBar.addEventListener('input', () => {
+            const query = searchBar.value.toLowerCase();
+            resultsContainer.innerHTML = '';
+
+            if (query) {
+                const filteredItems = items.filter(item => item.toLowerCase().includes(query));
+
+                if (filteredItems.length > 0) {
+                    filteredItems.forEach(item => {
+                        const div = document.createElement('div');
+                        div.textContent = item;
+                        resultsContainer.appendChild(div);
+                    });
+                } else {
+                    const noResult = document.createElement('div');
+                    noResult.textContent = 'Nenhum item encontrado';
+                    resultsContainer.appendChild(noResult);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
